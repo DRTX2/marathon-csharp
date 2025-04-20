@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using TodoList.Models;
+using TodoList.Entities;
 
 namespace TodoList.Application.Dtos;
 
@@ -11,7 +11,7 @@ public class TaskUpdateRequest
     [StringLength(100)]
     public String Description { get; set; }
 
-    public Priority priority { get; set; }  
+    public Priority Priority { get; set; }  
     
     [FutureDate(ErrorMessage = "Due date must be in the future")]
     public DateTime? DueDate { get; set; } 

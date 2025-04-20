@@ -22,7 +22,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateTask([FromBody] TaskCreationRequest request)
+    public async Task<IActionResult> Create([FromBody] TaskCreationRequest request)
     // metodo asincrono que devuelve una accion http(status+body). 
     {
         try
@@ -37,7 +37,7 @@ public class TasksController : ControllerBase
             // Es un método de ASP.NET Core que genera una respuesta 201 Created apuntando a un endpoint existente.
             return CreatedAtAction(
                 // Esto se convierte en "GetById" en tiempo de compilación. Es una manera segura de referenciar el método del controlador llamado GetById (para evitar errores por escribir strings manualmente).
-                    nameof(GetTaskById), 
+                    nameof(GetById), 
                 // Es un objeto anónimo con los parámetros que se necesitan para resolver la ruta del método GetById, en este caso el id.
                     new {id=createdTask.Id},
                 // Este es el cuerpo de la respuesta.
@@ -52,16 +52,39 @@ public class TasksController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetTaskById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
         var task = await _taskService.GetByIdAsync(id);
         if (task == null)
             return NotFound();
         return Ok(task);
     }
-    
-    
-    
 
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
+    {
+        var tasks = await _taskService.GetAllAsync();
+        return Ok(tasks);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(int id, [FromBody] TaskUpdateRequest request)
+    {
+        await _taskService.UpdateAsync(
+            id,
+            request.Title,
+            request.Description,
+            request.Priority,
+            request.DueDate
+        );
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> delete(int id)
+    {
+        await _taskService.DeleteAsync(id);
+        return NoContent();
+    }
 
 }
