@@ -1,19 +1,21 @@
 using System.ComponentModel.DataAnnotations;
-using TodoList.Models;
+using TodoList.Entities;
+
 
 namespace TodoList.Application.Dtos;
 
 public class TaskCreationRequest
 {
-    [Required] [StringLength(50)] 
+    [Required] 
+    [StringLength(50)] 
     public string Title { get; set; }
     
     [StringLength(100)]
     public String Description { get; set; }
 
-    public Priority Priority { get; set; } = Priority.MEDIUM;
+    public Entities.Priority Priority { get; set; } = Priority.MEDIUM;
     
     [FutureDate(ErrorMessage = "Due date must be in the future")]
     public DateTime? DueDate { get; set; } 
-    public int? ListId { get; set; }
+    // public int? ListId { get; set; }
 }

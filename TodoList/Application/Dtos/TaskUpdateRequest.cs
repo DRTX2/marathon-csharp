@@ -3,7 +3,6 @@ using TodoList.Models;
 
 namespace TodoList.Application.Dtos;
 
-
 public class TaskUpdateRequest
 {
     [StringLength(50)] 
