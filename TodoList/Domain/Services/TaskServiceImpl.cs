@@ -1,5 +1,6 @@
 using TodoList.Domain.Ports.In;
 using TodoList.Domain.Ports.Out;
+using TodoList.Entities;
 
 namespace TodoList.Domain.Services;
 
@@ -12,23 +13,42 @@ public class TaskServiceImpl:TaskService
         _taskRepository = taskRepository;
     }
 
-    public Task fetchOne(int id)
+    public async Task<TaskItem> CreateTaskAsync(string title, string description, Priority priority, DateTime? dueTime=null)
     {
-        return _taskRepository.GetByIdAsync(id);
+        var newTask = new TaskItem(title, description, priority, DateTime.Now, DateTime.Now);
+        if(dueTime!=null)
+            newTask.setDueDate(dueTime);
+        await _taskRepository.CreateAsync(newTask);
+        return newTask;
     }
 
-    public void Create(int taskList, Task task)
+    public async Task<TaskItem> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _taskRepository.GetByIdAsync(id);
     }
 
-    public void Update(int id, Task task)
+    public Task<IEnumerable<TaskItem>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return _taskRepository.GetAllAsync();
     }
 
-    public void Delete(int id)
+    public async Task UpdateAsync(int id, string? title, string? description, Priority? priority, DateTime? updatedAt=null)
     {
-        throw new NotImplementedException();
+        var task = await _taskRepository.GetByIdAsync(id);
+        if (task == null)
+            throw new Exception("Task not found");
+        task.UpdateDetails(
+            title?? task.Title,
+            description?? task.Description,
+            priority?? task.Priority,
+            updatedAt
+        );
+        
+        await _taskRepository.UpdateAsync(task);
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        await _taskRepository.DeleteAsync(id);
     }
 }
