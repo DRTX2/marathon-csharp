@@ -54,37 +54,75 @@ public class TasksController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetById(int id)
     {
-        var task = await _taskService.GetByIdAsync(id);
-        if (task == null)
-            return NotFound();
-        return Ok(task);
+        try
+        {
+
+            var task = await _taskService.GetByIdAsync(id);
+            if (task == null)
+                return NotFound();
+            return Ok(task);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex,$"Error getting task with ID {id}");
+            return StatusCode(500, new { Error = ex.Message });
+        }
+
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
     {
-        var tasks = await _taskService.GetAllAsync();
-        return Ok(tasks);
+        try
+        {
+
+            var tasks = await _taskService.GetAllAsync();
+            return Ok(tasks);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Error getting all tasks" );
+            return StatusCode(500, new { Error = "Internal Server Error"});
+        }
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> Update(int id, [FromBody] TaskUpdateRequest request)
     {
-        await _taskService.UpdateAsync(
-            id,
-            request.Title,
-            request.Description,
-            request.Priority,
-            request.DueDate
-        );
-        return NoContent();
+        try
+        {
+
+            await _taskService.UpdateAsync(
+                id,
+                request.Title,
+                request.Description,
+                request.Priority,
+                request.DueDate
+            );
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex,$"Error updating task with id {id}");
+            return StatusCode(500, new { Error = ex.Message });
+        }
+        
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> delete(int id)
     {
-        await _taskService.DeleteAsync(id);
-        return NoContent();
+        try
+        {
+
+            await _taskService.DeleteAsync(id);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Error trying to delete task with ID {id}");
+            return StatusCode(500, new {Error="Internal Server Error"});
+        }
     }
 
 }
