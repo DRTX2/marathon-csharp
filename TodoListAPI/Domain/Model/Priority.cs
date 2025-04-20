@@ -1,4 +1,4 @@
-namespace TodoList.Entities;
+namespace TodoListAPI.Models;
 
 public enum Priority
 {

@@ -1,7 +1,7 @@
-using TodoList.Models;
+using TodoListAPI.Entities;
 using Task = System.Threading.Tasks.Task;
 
-namespace TodoList.Domain.Ports.In;
+namespace TodoListAPI.Domain.Ports.In;
 
 public interface UserService
 {

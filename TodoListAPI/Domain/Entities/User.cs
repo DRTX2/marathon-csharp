@@ -1,4 +1,4 @@
-namespace TodoList.Entities;
+namespace TodoListAPI.Entities;
 
 public class User
 {

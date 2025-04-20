@@ -1,6 +1,6 @@
-using TodoList.Entities;
+using TodoListAPI.Entities;
 
-namespace TodoList.Domain.Ports.Out;
+namespace TodoListAPI.Domain.Ports.Out;
 
 public interface UserRepository
 {

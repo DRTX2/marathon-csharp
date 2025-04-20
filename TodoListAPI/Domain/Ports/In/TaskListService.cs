@@ -1,6 +1,6 @@
-using TodoList.Entities;
+using TodoListAPI.Entities;
 
-namespace TodoList.Domain.Ports.In;
+namespace TodoListAPI.Domain.Ports.In;
 
 public interface TaskListService
 {
