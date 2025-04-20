@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList", "TodoList\TodoList.csproj", "{F73CCFC5-333A-41B4-95AC-088E50744543}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoListAPI", "TodoListAPI\TodoListAPI.csproj", "{904B59FC-57F3-47DF-8D68-9A3DE2A1DCFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F73CCFC5-333A-41B4-95AC-088E50744543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F73CCFC5-333A-41B4-95AC-088E50744543}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F73CCFC5-333A-41B4-95AC-088E50744543}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F73CCFC5-333A-41B4-95AC-088E50744543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{904B59FC-57F3-47DF-8D68-9A3DE2A1DCFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{904B59FC-57F3-47DF-8D68-9A3DE2A1DCFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{904B59FC-57F3-47DF-8D68-9A3DE2A1DCFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{904B59FC-57F3-47DF-8D68-9A3DE2A1DCFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
